@@ -31,11 +31,11 @@ class RegisterView(generics.GenericAPIView):
 
        
 
-        absurl = 'http://'+current_site+relativeLink+"?token="+token
+        absurl = 'http://'+current_site+relativeLink+"?token="+str(token)
      
         email_body = 'Hi '+user.username+' Use link below to verify your email \n' + absurl
         data = {
-            'email_body' : email_body, 'email_subject' : 'Verify your email'
+            'email_body' : email_body, 'to_email' : user.email, 'email_subject' : 'Verify your email'
         }
         Util.send_email(data)
 
