@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 
 
@@ -136,10 +137,14 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EMAIL_BACKEND = 'authentication.OAuth2EmailBackend.OAuth2EmailBackend'
-EMAIL_USE_TLS=True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT=587
-EMAIL_HOST_USER= os.environ.get('EMAIL_HOST_USER')
-TOKEN_FILE = BASE_DIR / "token_file.json"
+# Email backend for development
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# Mailjet SMTP configuration
+EMAIL_HOST = "in-v3.mailjet.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config("EMAIL_HOST_USER" , default = None)  # Replace with your Mailjet API Key
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD" , default = None)  # Replace with your Mailjet Secret Key
+DEFAULT_FROM_EMAIL = "Balogun Ademola <erinsweettreats@ecomass.store>"  # Ensure it's verified in Mailjet
 
