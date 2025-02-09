@@ -7,6 +7,7 @@ from .utils import Util
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 import jwt
+from .renderers import UserRenderer
 from django.conf import settings
 from .serializers import EmailVerificationSerializer
 from drf_yasg.utils import swagger_auto_schema
@@ -15,7 +16,7 @@ from drf_yasg import openapi
 
 class RegisterView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
-
+    renderer_classes = (UserRenderer,)
 
     def post(self, request):
         user = request.data
