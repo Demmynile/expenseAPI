@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Expense",
+            name="Income",
             fields=[
                 (
                     "id",
@@ -27,13 +27,12 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "category",
+                    "source",
                     models.CharField(
                         choices=[
-                            ("ONLINE_SERVICES", "ONLINE_SERVICES"),
-                            ("TRAVEL", "TRAVEL"),
-                            ("FOOD", "FOOD"),
-                            ("RENT", "RENT"),
+                            ("SALARY", "SALARY"),
+                            ("BUSINESS", "BUSINESS"),
+                            ("SIDE-HUSTLES", "SIDE-HUSTLES"),
                             ("OTHERS", "OTHERS"),
                         ],
                         max_length=255,

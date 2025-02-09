@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "authentication",
     "expenses",
+    "income",
     "sendgrid",
     "drf_yasg"
 ]
