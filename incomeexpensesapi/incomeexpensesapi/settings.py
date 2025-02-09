@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import datetime
 
 # Load the .env file
 load_dotenv()
@@ -116,6 +117,11 @@ REST_FRAMEWORK = {
     ),
 }
 
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME' : datetime.timedelta(minutes = 5),
+    'REFRESH_TOKEN_LIFETIME' : datetime.timedelta(days = 1)
+}
 
 
 # Password validation
