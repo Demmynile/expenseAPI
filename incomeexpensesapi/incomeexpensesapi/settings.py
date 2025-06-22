@@ -35,7 +35,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL= 'authentication.User'
+AUTH_USER_MODEL= "authentication.User"
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "authentication",
     "expenses",
     "income",
+    "userstats",
     "sendgrid",
     "drf_yasg"
 ]
@@ -103,8 +104,12 @@ WSGI_APPLICATION = "incomeexpensesapi.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DATABASE_NAME"),  # Replace with your database name
+        "USER": os.getenv("DATABASE_USER"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),  # Replace with your database password
+        "HOST": os.getenv("DATABASE_HOST"),  # or your DB host, e.g., "127.0.0.1" or a Docker container name
+        "PORT": os.getenv("DATABASE_PORT")     # Default PostgreSQL port
     }
 }
 
