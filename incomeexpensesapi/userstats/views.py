@@ -24,12 +24,13 @@ class ExpenseSummaryStats(APIView):
     
     def get(self, request):
         todays_date = datetime.date.today()
-        ayear_ago = todays_date - datetime.timedelta(days=30*12)
-        expenses = Expense.objects.filter(owner=request.user , date__gte=ayear_ago, date__lte=todays_date)
+        ayear_ago = todays_date - datetime.timedelta(days=30 * 12)
+        expenses = Expense.objects.filter(owner=request.user, date__gte=ayear_ago, date__lte=todays_date)
         final = {}
-        categories = list(set(map(self.get_category, expenses)))
-        for expense in expenses:
-            for category in categories:
-                final[category] = self.get_amount_for_category(expense , category)
 
-            return response({'category_data': final} , status=status.HTTP_200_OK)
+        categories = list(set(map(self.get_category, expenses)))
+
+        for category in categories:
+            final[category] = self.get_amount_for_category(expenses, category)
+
+        return response.Response({'category_data': final}, status=status.HTTP_200_OK)
